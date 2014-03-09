@@ -32,11 +32,12 @@ public class WhoisCom extends WhoisAbstract implements Whois{
 					String remoteTLD = queryLine.substring(1, queryLine.length()-1);
 					log.debug(remoteTLD);					
 				}
-				if(queryLine.contains("Expiration Date:")){
-					String expString = queryLine.replace("Expiration Date:", "").trim();
-					DateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+				if(queryLine.contains("Registry Expiry Date:")){					
+					String expString = queryLine.replace("Registry Expiry Date:", "").trim();
+					//String expString = queryLine.replace("Expiration Date:", "").trim();
+					DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
 					try {
-						log.info("Exp: " + queryLine.replace("Expiration Date:", "").trim());						
+						log.info("Exp: " + queryLine.replace("Registry Expiry Date:", "").trim());						
 						//expDate = df.parse(expString.replaceAll("\\p{Cntrl}", ""));
 						expDate = df.parse(expString);
 					} catch (ParseException e) {						 

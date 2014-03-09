@@ -46,7 +46,7 @@ public abstract class WhoisAbstract {
 		    Socket theSocket = new Socket(server, getWhoisPort());
 		    Writer out = new OutputStreamWriter(theSocket.getOutputStream(), "8859_1");
 		    log.debug("write");
-		    out.write(String.format("domain %s\r\n",query));
+		    out.write(String.format("%s\r\n",query));
 		    log.debug("flush");
 		    out.flush();		    
 		    InputStream queryResult = new BufferedInputStream(theSocket.getInputStream());
