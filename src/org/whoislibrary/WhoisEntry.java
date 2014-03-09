@@ -2,6 +2,13 @@ package org.whoislibrary;
 
 import java.util.Date;
 
+/**
+ * 
+ * This class contains all the informations about the Whois query result.
+ * 
+ * @author Ivan Gualandri
+ * @version 1.0
+ */
 public class WhoisEntry {
 	
 	public String domainName;

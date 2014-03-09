@@ -6,6 +6,13 @@ import java.util.ResourceBundle;
 import org.whoislibrary.log.WhoisLogger;
 import org.whoislibrary.log.WhoisLoggerFactory;
 
+/**
+ * 
+ * This class is used to issue the whois command.
+ * 
+ * @author MyName
+ * @since mm-dd-yyyy
+ */
 public class WhoisCommand {	
 	private static WhoisLogger log = WhoisLoggerFactory.getLogger();
 	private String searchQuery = null;
@@ -28,7 +35,7 @@ public class WhoisCommand {
 		this.searchQuery = searchQuery;
 	}
 	
-	 /** 
+	/** 
 	  * This method find the tld from a domain query, and return the classname needed for the whoisRequest.
 	  * @param query The domain query 
 	  * @return the classname needed for that TLD.
@@ -43,27 +50,24 @@ public class WhoisCommand {
 		return null;
 	}
 	
+	/** 
+	  * This method executes the query and return a WhoisEntry object. 
+	  * @return the WhoisEntry object if the domain is found.
+	  */
 	public WhoisEntry executeQuery(){
 		//String url = URLPrefix + searchQuery + URLSuffix;		
 		rb = ResourceBundle.getBundle("whois");
-		if(rb == null) 
+		
+		if(rb == null) {
 			log.error("Error");
-		else
+		}
+		else {
 			log.info("Ok");
-//		Enumeration <String> keys = rb.getKeys();		
-//		while(keys.hasMoreElements()){
-//			String key = keys.nextElement();
-//			String value = rb.getString(key);
-//			log.debug(key + " : " + value);			
-//		}
-//		try {
-//			System.out.println("Class: " + Class.forName("org.whoislibrary.WhoisEntry").toString());
-//		} catch (ClassNotFoundException e) {
-//			System.out.println("Class NOT FOUND");
-//			e.printStackTrace();
-//		}
+		}
+
 		String fullclassname = getTLDClass(getSearchQuery());
 		Whois myQuery = WhoisFactory.getWhois(fullclassname);
+		
 		if (myQuery != null) {
 			WhoisEntry myEntry = myQuery.executeQuery(getSearchQuery());
 			if(myEntry!=null) {

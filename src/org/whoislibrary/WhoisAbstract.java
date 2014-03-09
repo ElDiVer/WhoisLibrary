@@ -34,14 +34,17 @@ public abstract class WhoisAbstract {
 	public abstract WhoisEntry parseResponse(BufferedReader queryResult);	
 	//public abstract Date getExpirationDate();
 	
+	/** Return the whois port used */ 
 	public int getWhoisPort() {
 		return 43;
 	}
 	
+	/** Set a prefix in the query if needed. I.e. for .com domain is safest to add domain prefix before the query. */
 	public void setPrefix(String queryPrefix){
 		this.queryPrefix = queryPrefix;
 	}
 	
+	/** Return the query Prefix if set.*/
 	public String getQueryPrefix(){
 		return this.getQueryPrefix();
 	}
