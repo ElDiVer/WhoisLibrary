@@ -20,15 +20,19 @@ public class WhoisIt extends WhoisAbstract implements Whois {
 		String queryLine;
 		Date expDate = null;
 		System.out.println(queryResult.toString());
+		
 		try {
 			while ((queryLine = queryResult.readLine()) != null) {
-				if(queryLine.contains("Registry Expiry Date:")){
+				
+				if(queryLine.contains("Expire Date:")){
 					String expString = queryLine.replace("Expire Date:", "").trim();
+					System.out.println("expString");
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		return null;
 	}
 
