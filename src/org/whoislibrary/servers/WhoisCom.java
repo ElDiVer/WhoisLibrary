@@ -18,6 +18,11 @@ public class WhoisCom extends WhoisAbstract implements Whois{
 
 	private static WhoisLogger log = WhoisLoggerFactory.getLogger();
 	
+	public WhoisCom(){
+		super();
+		this.setPrefix("domain");
+	}
+	
 	public String getWhoisURL() {
 		return "whois.internic.net";
 	}
@@ -43,9 +48,6 @@ public class WhoisCom extends WhoisAbstract implements Whois{
 						e.printStackTrace();
 					}					
 				}
-				if(queryLine.contains("expires on")){
-					String expString = queryLine.replace("Record expires on ", "").replace(".", "");									
-				} 
 				i++;
 			}
 			log.debug("Date: " + expDate );

@@ -26,7 +26,8 @@ import org.whoislibrary.log.WhoisLoggerFactory;
 public abstract class WhoisAbstract {
 	
 	//
-	private static final WhoisLogger log = WhoisLoggerFactory.getLogger(); 
+	private static final WhoisLogger log = WhoisLoggerFactory.getLogger();
+	private String queryPrefix;
 	public String domainName;
 	
 	public abstract String getWhoisURL();
@@ -35,6 +36,14 @@ public abstract class WhoisAbstract {
 	
 	public int getWhoisPort() {
 		return 43;
+	}
+	
+	public void setPrefix(String queryPrefix){
+		this.queryPrefix = queryPrefix;
+	}
+	
+	public String getQueryPrefix(){
+		return this.getQueryPrefix();
 	}
 	
 	public WhoisEntry executeQuery(String query) {
@@ -46,7 +55,7 @@ public abstract class WhoisAbstract {
 		    Socket theSocket = new Socket(server, getWhoisPort());
 		    Writer out = new OutputStreamWriter(theSocket.getOutputStream(), "8859_1");
 		    log.debug("write");
-		    out.write(String.format("domain %s\r\n",query));
+		    out.write(prepareQuery(query));
 		    log.debug("flush");
 		    out.flush();		    
 		    InputStream queryResult = new BufferedInputStream(theSocket.getInputStream());
@@ -67,6 +76,14 @@ public abstract class WhoisAbstract {
 	
 	public Date getDate(String dateString){
 		return null;
+	}
+	
+	private String prepareQuery(String query){
+		if(queryPrefix!=null){
+			return String.format( queryPrefix + " %s\r\n",query);
+		} else {
+			return String.format("%s\r\n",query);
+		}
 	}
 		
 }

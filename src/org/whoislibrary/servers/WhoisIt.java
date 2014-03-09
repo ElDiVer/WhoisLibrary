@@ -2,13 +2,21 @@ package org.whoislibrary.servers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import org.whoislibrary.Whois;
 import org.whoislibrary.WhoisAbstract;
 import org.whoislibrary.WhoisEntry;
+import org.whoislibrary.log.WhoisLogger;
+import org.whoislibrary.log.WhoisLoggerFactory;
 
 public class WhoisIt extends WhoisAbstract implements Whois {
+	
+	private static WhoisLogger log = WhoisLoggerFactory.getLogger();
 
 	@Override
 	public String getWhoisURL() {
@@ -26,14 +34,21 @@ public class WhoisIt extends WhoisAbstract implements Whois {
 				
 				if(queryLine.contains("Expire Date:")){
 					String expString = queryLine.replace("Expire Date:", "").trim();
-					System.out.println("expString");
+					DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+					try {
+						log.info("Exp: " + queryLine.replace("Expire Date:", "").trim());						
+						//expDate = df.parse(expString.replaceAll("\\p{Cntrl}", ""));
+						expDate = df.parse(expString);
+					} catch (ParseException e) {						 
+						e.printStackTrace();
+					}					
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return new WhoisEntry(domainName, expDate);
 	}
 
 }
