@@ -11,8 +11,8 @@ import java.util.Date;
  */
 public class WhoisEntry {
 	
-	public String domainName;
-	public Date expirationDate;
+	private String domainName;
+	private Date expirationDate;
 	private boolean isRedirected;
 	private String redirectURL;	
 
@@ -29,7 +29,14 @@ public class WhoisEntry {
 	public boolean isRedirected() {
 		return isRedirected;
 	}
-	
+
+	public Date getExpirationDate() {
+		return expirationDate;
+	}
+
+	public String getURLRedirect() {
+		return redirectURL;
+	}
 	//public set
 			
 }
