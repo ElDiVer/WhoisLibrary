@@ -15,7 +15,7 @@ import org.whoislibrary.WhoisEntry;
 import org.whoislibrary.log.WhoisLogger;
 import org.whoislibrary.log.WhoisLoggerFactory;
 
-public class WhoisOrg extends WhoisAbstract implements Whois{
+public class WhoisOrg extends WhoisAbstract implements Whois {
 	
 	private static WhoisLogger log = WhoisLoggerFactory.getLogger();
 	

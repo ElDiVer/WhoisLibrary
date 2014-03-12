@@ -28,18 +28,23 @@ public abstract class WhoisAbstract {
 	//
 	private static final WhoisLogger log = WhoisLoggerFactory.getLogger();
 	private String queryPrefix;
-	public String domainName;
+	protected String domainName;
 	
 	public abstract String getWhoisURL();
 	public abstract WhoisEntry parseResponse(BufferedReader queryResult);	
 	//public abstract Date getExpirationDate();
-	
+
+	public String getDomainName() {
+		return domainName;
+	}
+
 	/** Return the whois port used */ 
 	public int getWhoisPort() {
 		return 43;
 	}
 	
-	/** Set a prefix in the query if needed. I.e. for .com domain is safest to add domain prefix before the query. */
+	/** Set a prefix in the query if needed. I.e. for .com
+	 * domain is safest to add domain prefix before the query. */
 	public void setPrefix(String queryPrefix){
 		this.queryPrefix = queryPrefix;
 	}
@@ -61,9 +66,13 @@ public abstract class WhoisAbstract {
 		    out.write(prepareQuery(query));
 		    log.debug("flush");
 		    out.flush();		    
-		    InputStream queryResult = new BufferedInputStream(theSocket.getInputStream());
-		    BufferedReader queryData = new BufferedReader(new InputStreamReader(queryResult));
-		    
+
+		    InputStream queryResult =
+		    		new BufferedInputStream(theSocket.getInputStream());
+
+		    BufferedReader queryData = new BufferedReader(
+		    		new InputStreamReader(queryResult));
+
 		    return parseResponse(queryData);
 		    
 		} catch (MalformedURLException e) {
@@ -77,11 +86,11 @@ public abstract class WhoisAbstract {
 		return null;
 	}
 	
-	public Date getDate(String dateString){
+	public Date getDate(String dateString) {
 		return null;
 	}
 	
-	private String prepareQuery(String query){
+	private String prepareQuery(String query) {
 		if(queryPrefix!=null){
 			return String.format( queryPrefix + " %s\r\n",query);
 		} else {
