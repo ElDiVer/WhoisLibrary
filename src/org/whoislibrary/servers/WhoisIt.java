@@ -16,7 +16,7 @@ import org.whoislibrary.log.WhoisLoggerFactory;
 
 public class WhoisIt extends WhoisAbstract implements Whois {
 	
-	private static WhoisLogger log = WhoisLoggerFactory.getLogger();
+	private static final WhoisLogger log = WhoisLoggerFactory.getLogger();
 
 	@Override
 	public String getWhoisURL() {

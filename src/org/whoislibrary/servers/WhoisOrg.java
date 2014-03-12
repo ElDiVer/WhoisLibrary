@@ -27,13 +27,14 @@ public class WhoisOrg extends WhoisAbstract implements Whois {
 	public WhoisEntry parseResponse(BufferedReader queryResult) {
 		String queryLine;
 		Date expDate = null;
-		int i =0;
 	    try {	    	
-			while ((queryLine = queryResult.readLine()) != null) {
-				if(queryLine.startsWith("[")){
+	    	for (int i = 0; (queryLine = queryResult.readLine()) != null; i++) {
+
+	    		if(queryLine.startsWith("[")){
 					String remoteTLD = queryLine.substring(1, queryLine.length()-1);
 					log.debug(remoteTLD);					
 				}
+
 				if(queryLine.contains("Registry Expiry Date:")){					
 					String expString = queryLine.replace("Registry Expiry Date:", "").trim();
 					//String expString = queryLine.replace("Expiration Date:", "").trim();
@@ -46,11 +47,12 @@ public class WhoisOrg extends WhoisAbstract implements Whois {
 						e.printStackTrace();
 					}					
 				}
-				if(queryLine.contains("expires on")){
-					String expString = queryLine.replace("Record expires on ", "").replace(".", "");									
-				} 
-				i++;
-			}
+
+				//if(queryLine.contains("expires on")){
+				//	String expString = queryLine.replace("Record expires on ", "").replace(".", "");									
+				//}
+
+	    	}
 			log.debug("Date: " + expDate );
 		} catch (IOException e) {
 			e.printStackTrace();

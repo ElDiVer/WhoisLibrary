@@ -73,8 +73,10 @@ public abstract class WhoisAbstract {
 		    BufferedReader queryData = new BufferedReader(
 		    		new InputStreamReader(queryResult));
 
-		    return parseResponse(queryData);
-		    
+		    WhoisEntry ret = parseResponse(queryData);
+		    theSocket.close();
+
+		    return ret;
 		} catch (MalformedURLException e) {
 			log.error(e.getStackTrace().toString());
 			e.printStackTrace();
