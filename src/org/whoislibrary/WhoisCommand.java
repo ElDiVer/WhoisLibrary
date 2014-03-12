@@ -71,7 +71,7 @@ public class WhoisCommand {
 		if (myQuery != null) {
 			WhoisEntry myEntry = myQuery.executeQuery(getSearchQuery());
 			if(myEntry!=null) {
-				System.out.println(myEntry.domainName + " expires on " + myEntry.expirationDate);
+				System.out.println(myEntry.getDomainName() + " expires on " + myEntry.getExpirationDate());
 				return myEntry;	
 			}
 		}		
