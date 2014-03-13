@@ -14,7 +14,7 @@ import org.whoislibrary.log.WhoisLoggerFactory;
  * @since mm-dd-yyyy
  */
 public class WhoisCommand {	
-	private static WhoisLogger log = WhoisLoggerFactory.getLogger();
+	private static final WhoisLogger log = WhoisLoggerFactory.getLogger();
 	private String searchQuery = null;
 	private ResourceBundle rb;
 
@@ -71,7 +71,8 @@ public class WhoisCommand {
 		if (myQuery != null) {
 			WhoisEntry myEntry = myQuery.executeQuery(getSearchQuery());
 			if(myEntry!=null) {
-				System.out.println(myEntry.getDomainName() + " expires on " + myEntry.getExpirationDate());
+				System.out.println(myEntry.getDomainName()
+						+ " expires on " + myEntry.getExpirationDate());
 				return myEntry;	
 			}
 		}		

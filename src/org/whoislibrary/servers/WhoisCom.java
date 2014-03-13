@@ -30,13 +30,15 @@ public class WhoisCom extends WhoisAbstract implements Whois{
 	public WhoisEntry parseResponse(BufferedReader queryResult) {
 		String queryLine;
 		Date expDate = null;
-		int i =0;
-	    try {	    	
-			while ((queryLine = queryResult.readLine()) != null) {
-				if(queryLine.startsWith("[")){
+    	WhoisEntry ret = new WhoisEntry(domainName);
+		try {	    	
+	    	for (int i = 0; (queryLine = queryResult.readLine()) != null; i++) {
+
+	    		if(queryLine.startsWith("[")){
 					String remoteTLD = queryLine.substring(1, queryLine.length()-1);
 					log.debug(remoteTLD);					
 				}
+
 				if(queryLine.contains("Expiration Date:")){
 					String expString = queryLine.replace("Expiration Date:", "").trim();
 					DateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
@@ -44,16 +46,17 @@ public class WhoisCom extends WhoisAbstract implements Whois{
 						log.info("Exp: " + queryLine.replace("Expiration Date:", "").trim());						
 						//expDate = df.parse(expString.replaceAll("\\p{Cntrl}", ""));
 						expDate = df.parse(expString);
+					    ret.setExpirationDate(expDate);
 					} catch (ParseException e) {						 
 						e.printStackTrace();
 					}					
 				}
-				i++;
+
 			}
 			log.debug("Date: " + expDate );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	    return new WhoisEntry(domainName, expDate);
+	    return ret;
 	}
 }

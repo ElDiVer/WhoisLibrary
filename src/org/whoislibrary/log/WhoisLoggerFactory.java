@@ -10,7 +10,7 @@ public class WhoisLoggerFactory {
 		return getLogger(WhoisLoggerFactory.class);
 	}
 
-	public static WhoisLogger getLogger(Class className){
+	public static WhoisLogger getLogger(Object className){
 		if (logger == null) {
 			try {		    
 			    Class.forName("android.util.Log");		    

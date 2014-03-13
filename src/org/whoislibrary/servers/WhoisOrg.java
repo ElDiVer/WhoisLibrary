@@ -15,7 +15,7 @@ import org.whoislibrary.WhoisEntry;
 import org.whoislibrary.log.WhoisLogger;
 import org.whoislibrary.log.WhoisLoggerFactory;
 
-public class WhoisOrg extends WhoisAbstract implements Whois{
+public class WhoisOrg extends WhoisAbstract implements Whois {
 	
 	private static WhoisLogger log = WhoisLoggerFactory.getLogger();
 	
@@ -27,13 +27,16 @@ public class WhoisOrg extends WhoisAbstract implements Whois{
 	public WhoisEntry parseResponse(BufferedReader queryResult) {
 		String queryLine;
 		Date expDate = null;
-		int i =0;
+		WhoisEntry ret = new WhoisEntry(domainName);
+
 	    try {	    	
-			while ((queryLine = queryResult.readLine()) != null) {
-				if(queryLine.startsWith("[")){
+	    	for (int i = 0; (queryLine = queryResult.readLine()) != null; i++) {
+
+	    		if(queryLine.startsWith("[")){
 					String remoteTLD = queryLine.substring(1, queryLine.length()-1);
 					log.debug(remoteTLD);					
 				}
+
 				if(queryLine.contains("Registry Expiry Date:")){					
 					String expString = queryLine.replace("Registry Expiry Date:", "").trim();
 					//String expString = queryLine.replace("Expiration Date:", "").trim();
@@ -42,20 +45,22 @@ public class WhoisOrg extends WhoisAbstract implements Whois{
 						log.info("Exp: " + queryLine.replace("Registry Expiry Date:", "").trim());						
 						//expDate = df.parse(expString.replaceAll("\\p{Cntrl}", ""));
 						expDate = df.parse(expString);
+						ret.setExpirationDate(expDate);
 					} catch (ParseException e) {						 
 						e.printStackTrace();
 					}					
 				}
-				if(queryLine.contains("expires on")){
-					String expString = queryLine.replace("Record expires on ", "").replace(".", "");									
-				} 
-				i++;
-			}
+
+				//if(queryLine.contains("expires on")){
+				//	String expString = queryLine.replace("Record expires on ", "").replace(".", "");									
+				//}
+
+	    	}
 			log.debug("Date: " + expDate );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	    return new WhoisEntry(domainName, expDate);
+	    return ret;
 	}
 
 

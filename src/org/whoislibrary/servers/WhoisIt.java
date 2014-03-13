@@ -16,7 +16,7 @@ import org.whoislibrary.log.WhoisLoggerFactory;
 
 public class WhoisIt extends WhoisAbstract implements Whois {
 	
-	private static WhoisLogger log = WhoisLoggerFactory.getLogger();
+	private static final WhoisLogger log = WhoisLoggerFactory.getLogger();
 
 	@Override
 	public String getWhoisURL() {
@@ -27,8 +27,8 @@ public class WhoisIt extends WhoisAbstract implements Whois {
 	public WhoisEntry parseResponse(BufferedReader queryResult) {
 		String queryLine;
 		Date expDate = null;
+		WhoisEntry ret = new WhoisEntry(domainName);
 		System.out.println(queryResult.toString());
-		
 		try {
 			while ((queryLine = queryResult.readLine()) != null) {
 				
@@ -39,6 +39,7 @@ public class WhoisIt extends WhoisAbstract implements Whois {
 						log.info("Exp: " + queryLine.replace("Expire Date:", "").trim());						
 						//expDate = df.parse(expString.replaceAll("\\p{Cntrl}", ""));
 						expDate = df.parse(expString);
+						ret.setExpirationDate(expDate);
 					} catch (ParseException e) {						 
 						e.printStackTrace();
 					}					
@@ -47,8 +48,7 @@ public class WhoisIt extends WhoisAbstract implements Whois {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		return new WhoisEntry(domainName, expDate);
+		return ret;
 	}
 
 }

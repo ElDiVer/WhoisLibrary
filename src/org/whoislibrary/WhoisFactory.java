@@ -13,8 +13,8 @@ import org.whoislibrary.log.WhoisLoggerFactory;
  */
 public class WhoisFactory {
 	
-	private static WhoisLogger log = WhoisLoggerFactory.getLogger(WhoisFactory.class);
-	public static Whois getWhois(String fullclassname){		
+	private static final WhoisLogger log = WhoisLoggerFactory.getLogger(WhoisFactory.class);
+	public static Whois getWhois(String fullclassname) {		
 		try {			
 			return (Whois)Class.forName(fullclassname).newInstance();
 		} catch (InstantiationException e) {			
