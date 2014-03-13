@@ -11,15 +11,13 @@ import java.util.Date;
  */
 public class WhoisEntry {
 	
-	private String domainName;
+	private final String domainName;
 	private Date expirationDate;
 	private boolean isRedirected;
 	private String redirectURL;	
 
-	public WhoisEntry(String domainName, Date expDate) {
-		// TODO Auto-generated constructor stub
+	public WhoisEntry(String domainName) {
 		this.domainName = domainName;
-		this.expirationDate = expDate;
 	}
 
 	public String getDomainName() {
@@ -30,13 +28,24 @@ public class WhoisEntry {
 		return isRedirected;
 	}
 
+	public void setRedirected(boolean redirected) {
+		isRedirected = redirected;
+	}
+	
 	public Date getExpirationDate() {
 		return expirationDate;
 	}
 
+	public void setExpirationDate(Date date) {
+		expirationDate = date;
+	}
+	
 	public String getURLRedirect() {
 		return redirectURL;
 	}
-	//public set
+
+	public void setURLRedirect(String redirect) {
+		redirectURL = redirect;
+	}
 			
 }

@@ -30,8 +30,8 @@ public class WhoisCom extends WhoisAbstract implements Whois{
 	public WhoisEntry parseResponse(BufferedReader queryResult) {
 		String queryLine;
 		Date expDate = null;
-	    try {	    	
-
+    	WhoisEntry ret = new WhoisEntry(domainName);
+		try {	    	
 	    	for (int i = 0; (queryLine = queryResult.readLine()) != null; i++) {
 
 	    		if(queryLine.startsWith("[")){
@@ -46,6 +46,7 @@ public class WhoisCom extends WhoisAbstract implements Whois{
 						log.info("Exp: " + queryLine.replace("Expiration Date:", "").trim());						
 						//expDate = df.parse(expString.replaceAll("\\p{Cntrl}", ""));
 						expDate = df.parse(expString);
+					    ret.setExpirationDate(expDate);
 					} catch (ParseException e) {						 
 						e.printStackTrace();
 					}					
@@ -56,6 +57,6 @@ public class WhoisCom extends WhoisAbstract implements Whois{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	    return new WhoisEntry(domainName, expDate);
+	    return ret;
 	}
 }

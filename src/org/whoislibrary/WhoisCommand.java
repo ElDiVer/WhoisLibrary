@@ -14,7 +14,7 @@ import org.whoislibrary.log.WhoisLoggerFactory;
  * @since mm-dd-yyyy
  */
 public class WhoisCommand {	
-	private static WhoisLogger log = WhoisLoggerFactory.getLogger();
+	private static final WhoisLogger log = WhoisLoggerFactory.getLogger();
 	private String searchQuery = null;
 	private ResourceBundle rb;
 
