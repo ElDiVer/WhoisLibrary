@@ -27,7 +27,7 @@ public class WhoisMain {
 		System.out.println("Reading WhoisEntry:\n\tDomain: "
 				+ firstEntry.getDomainName()
 				+ "\n\tExpiration: " + firstEntry.getExpirationDate());
-
+		System.out.println(firstEntry);
 //		System.out.println("Reading WhoisEntry:\n\tDomain: "
 //			+ firstEntry.getDomainName()
 //			+ "\n\tExpiration: " + firstEntry.expirationDate);

@@ -47,5 +47,9 @@ public class WhoisEntry {
 	public void setURLRedirect(String redirect) {
 		redirectURL = redirect;
 	}
+	
+	public String toString(){
+		return domainName + " expires on " + expirationDate;
+	}
 			
 }
