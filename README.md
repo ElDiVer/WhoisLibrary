@@ -12,6 +12,15 @@ This library is easy to use, and easy to extend, if you want to add a support fo
 * public WhoisEntry parseResponse(BufferedReader queryResult);
 * public String getWhoisURL();
 
+And add an entry into the file whois.properties, in the following format:
+
+tld=fullclassName
+
+For example:
+```Java
+org=org.whoislibrary.servers.WhoisOrg
+```
+
 Documentation
 -------------
 The documentation is available here: http://inuyasha82.github.io/WhoisLibrary/doc/index.html
