@@ -8,16 +8,16 @@ The requests that actually it can perform are only for the following domain type
 * .org 
 * .it
 
-This library is easy to use, and easy to extend, if you want to add a support for a new tld, you just need to extend the WhoisAbstract class, and override the following methods:
+This library is easy to use, and easy to extend, if you want to add a support for a new tld, you just have to extend the WhoisAbstract class, and override the following methods:
 * public WhoisEntry parseResponse(BufferedReader queryResult);
 * public String getWhoisURL();
-* 
 
 Documentation
 -------------
 The documentation is available here: http://inuyasha82.github.io/WhoisLibrary/doc/index.html
 
-Copyright and License
+
+Copyright and Licence
 ---------------------
 Author Ivan Gualandri
 
