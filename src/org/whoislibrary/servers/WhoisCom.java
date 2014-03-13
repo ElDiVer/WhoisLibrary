@@ -1,7 +1,5 @@
 package org.whoislibrary.servers;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,53 +8,36 @@ import java.util.Locale;
 
 import org.whoislibrary.Whois;
 import org.whoislibrary.WhoisAbstract;
-import org.whoislibrary.WhoisEntry;
 import org.whoislibrary.log.WhoisLogger;
 import org.whoislibrary.log.WhoisLoggerFactory;
 
+
 public class WhoisCom extends WhoisAbstract implements Whois{
 
-	private static WhoisLogger log = WhoisLoggerFactory.getLogger();
+	private static final WhoisLogger log = WhoisLoggerFactory.getLogger();
 	
 	public WhoisCom(){
-		super();
+		super("whois.internic.net");
 		this.setPrefix("domain");
 	}
 	
-	public String getWhoisURL() {
-		return "whois.internic.net";
-	}
-	
-	public WhoisEntry parseResponse(BufferedReader queryResult) {
-		String queryLine;
+	protected void parseLine(String queryLine, int i) {
 		Date expDate = null;
-    	WhoisEntry ret = new WhoisEntry(domainName);
-		try {	    	
-	    	for (int i = 0; (queryLine = queryResult.readLine()) != null; i++) {
-
-	    		if(queryLine.startsWith("[")){
-					String remoteTLD = queryLine.substring(1, queryLine.length()-1);
-					log.debug(remoteTLD);					
-				}
-
-				if(queryLine.contains("Expiration Date:")){
-					String expString = queryLine.replace("Expiration Date:", "").trim();
-					DateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-					try {
-						log.info("Exp: " + queryLine.replace("Expiration Date:", "").trim());						
-						//expDate = df.parse(expString.replaceAll("\\p{Cntrl}", ""));
-						expDate = df.parse(expString);
-					    ret.setExpirationDate(expDate);
-					} catch (ParseException e) {						 
-						e.printStackTrace();
-					}					
-				}
-
-			}
-			log.debug("Date: " + expDate );
-		} catch (IOException e) {
-			e.printStackTrace();
+	   	if(queryLine.startsWith("[")){
+			String remoteTLD = queryLine.substring(1, queryLine.length()-1);
+			log.debug(remoteTLD);					
 		}
-	    return ret;
+
+		if(queryLine.contains("Expiration Date:")){
+			String expString = queryLine.replace("Expiration Date:", "").trim();
+			DateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+			try {
+				log.info("Exp: " + queryLine.replace("Expiration Date:", "").trim());						
+				expDate = df.parse(expString);
+			    whoisEntry.setExpirationDate(expDate);
+			} catch (ParseException e) {						 
+				e.printStackTrace();
+			}					
+		}
 	}
 }

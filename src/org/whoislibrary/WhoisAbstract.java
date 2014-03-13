@@ -10,10 +10,10 @@ import java.io.Writer;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
-import java.util.Date;
 
 import org.whoislibrary.log.WhoisLogger;
 import org.whoislibrary.log.WhoisLoggerFactory;
+
 
 /**
  * 
@@ -28,14 +28,36 @@ public abstract class WhoisAbstract {
 	//
 	private static final WhoisLogger log = WhoisLoggerFactory.getLogger();
 	private String queryPrefix;
-	protected String domainName;
-	
-	public abstract String getWhoisURL();
-	public abstract WhoisEntry parseResponse(BufferedReader queryResult);	
-	//public abstract Date getExpirationDate();
+	private final String whoisURL;
+	protected WhoisEntry whoisEntry;
 
-	public String getDomainName() {
-		return domainName;
+	public WhoisAbstract(String whoisURL){
+		this.whoisURL = whoisURL;
+	}
+	
+	public String getWhoisURL() {		
+		return whoisURL;
+	}
+	/* This method is inherited by derived classes as a callback
+	   to parse the needed infos and fill the WhoisEntry object. */
+	protected abstract void parseLine(String line, int index);
+
+	public WhoisEntry parseResponse(BufferedReader queryResult) {
+		String queryLine;
+		try {	    	
+	    	for (int i = 0; (queryLine = queryResult.readLine()) != null; i++)
+	    		parseLine(queryLine, i);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    return whoisEntry;
+	}
+
+	public WhoisEntry getWhoisEntry() {
+		// TODO implement clone
+		//return (WhoisEntry)whoisEntry.clone();
+		return null;
 	}
 
 	/** Return the whois port used */ 
@@ -57,7 +79,7 @@ public abstract class WhoisAbstract {
 	public WhoisEntry executeQuery(String query) {
 		log.debug(query);
 		try {
-			domainName = query;
+			whoisEntry = new WhoisEntry(query);
 		    InetAddress server = null;
 		    server = InetAddress.getByName(getWhoisURL());
 		    Socket theSocket = new Socket(server, getWhoisPort());
@@ -85,10 +107,6 @@ public abstract class WhoisAbstract {
 			e.printStackTrace();
 		}
 		log.info("WhoisCom executeQuery");
-		return null;
-	}
-	
-	public Date getDate(String dateString) {
 		return null;
 	}
 	
