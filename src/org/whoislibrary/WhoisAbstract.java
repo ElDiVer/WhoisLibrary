@@ -29,7 +29,7 @@ public abstract class WhoisAbstract {
 	private static final WhoisLogger log = WhoisLoggerFactory.getLogger();
 	private String queryPrefix;
 	private final String whoisURL;
-	protected WhoisEntry whoisEntry;
+	protected WhoisEntry whoisEntry = null;
 
 	public WhoisAbstract(String whoisURL){
 		this.whoisURL = whoisURL;
@@ -42,7 +42,7 @@ public abstract class WhoisAbstract {
 	   to parse the needed infos and fill the WhoisEntry object. */
 	protected abstract void parseLine(String line, int index);
 
-	public WhoisEntry parseResponse(BufferedReader queryResult) {
+	public void parseResponse(BufferedReader queryResult) {
 		String queryLine;
 		try {	    	
 	    	for (int i = 0; (queryLine = queryResult.readLine()) != null; i++)
@@ -51,13 +51,12 @@ public abstract class WhoisAbstract {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	    return whoisEntry;
 	}
 
 	public WhoisEntry getWhoisEntry() {
 		// TODO implement clone
 		//return (WhoisEntry)whoisEntry.clone();
-		return null;
+		return whoisEntry;
 	}
 
 	/** Return the whois port used */ 
@@ -95,10 +94,11 @@ public abstract class WhoisAbstract {
 		    BufferedReader queryData = new BufferedReader(
 		    		new InputStreamReader(queryResult));
 
-		    WhoisEntry ret = parseResponse(queryData);
+		    parseResponse(queryData);
+
 		    theSocket.close();
 
-		    return ret;
+		    return whoisEntry;
 		} catch (MalformedURLException e) {
 			log.error(e.getStackTrace().toString());
 			e.printStackTrace();
