@@ -1,7 +1,5 @@
 package org.whoislibrary.servers;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,45 +8,29 @@ import java.util.Locale;
 
 import org.whoislibrary.Whois;
 import org.whoislibrary.WhoisAbstract;
-import org.whoislibrary.WhoisEntry;
-import org.whoislibrary.log.WhoisLogger;
-import org.whoislibrary.log.WhoisLoggerFactory;
 
 public class WhoisIt extends WhoisAbstract implements Whois {
 	
-	private static final WhoisLogger log = WhoisLoggerFactory.getLogger();
-
-	@Override
-	public String getWhoisURL() {
-		return  "whois.nic.it";
+	public WhoisIt(){
+		super("whois.nic.it");
 	}
 
 	@Override
-	public WhoisEntry parseResponse(BufferedReader queryResult) {
-		String queryLine;
+	protected void parseLine(String queryLine, int i) {
 		Date expDate = null;
-		WhoisEntry ret = new WhoisEntry(domainName);
-		System.out.println(queryResult.toString());
-		try {
-			while ((queryLine = queryResult.readLine()) != null) {
-				
-				if(queryLine.contains("Expire Date:")){
-					String expString = queryLine.replace("Expire Date:", "").trim();
-					DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-					try {
-						log.info("Exp: " + queryLine.replace("Expire Date:", "").trim());						
-						//expDate = df.parse(expString.replaceAll("\\p{Cntrl}", ""));
-						expDate = df.parse(expString);
-						ret.setExpirationDate(expDate);
-					} catch (ParseException e) {						 
-						e.printStackTrace();
-					}					
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+
+		if(queryLine.contains("Expire Date:")){
+			String expString = queryLine.replace("Expire Date:", "").trim();
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+			try {
+				log.info("Exp: " + queryLine.replace("Expire Date:", "").trim());						
+				expDate = df.parse(expString);
+				whoisEntry.setExpirationDate(expDate);
+			} catch (ParseException e) {						 
+				e.printStackTrace();
+			}					
 		}
-		return ret;
+
 	}
 
 }
