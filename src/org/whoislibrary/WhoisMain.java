@@ -6,38 +6,23 @@ public class WhoisMain {
 	 * @param args
 	 */
 	public static void main(String[] args) { 
+		WhoisCommand query = new WhoisCommand("google.com");
+		WhoisEntry firstEntry = query.executeQuery();
+		printEntry(firstEntry);
 
-		WhoisCommand myQuery = new WhoisCommand("google.com");
-		WhoisEntry firstEntry = myQuery.executeQuery();
+		query.setSearchQuery("dreamos.org");
+		firstEntry = query.executeQuery();
+		printEntry(firstEntry);
 
+		query.setSearchQuery("osdev.it");
+		firstEntry = query.executeQuery();		
+		printEntry(firstEntry);
+	}
+
+	public static void printEntry(WhoisEntry entry) {
 		System.out.println("Reading WhoisEntry:\n\tDomain: "
-				+ firstEntry.getDomainName() + "\n\t Expiration: "
-				+ firstEntry.getExpirationDate());
-
-		WhoisCommand myQuery2 = new WhoisCommand("dreamos.org");
-		firstEntry = myQuery2.executeQuery();
-
-		System.out.println("Reading WhoisEntry:\n\tDomain: "
-				+ firstEntry.getDomainName() + "\n\tExpiration: "
-				+ firstEntry.getExpirationDate());
-
-		WhoisCommand myQuery3 = new WhoisCommand("osdev.it");
-		firstEntry = myQuery3.executeQuery();		
-
-		System.out.println("Reading WhoisEntry:\n\tDomain: "
-				+ firstEntry.getDomainName()
-				+ "\n\tExpiration: " + firstEntry.getExpirationDate());
-		System.out.println(firstEntry);
-//		System.out.println("Reading WhoisEntry:\n\tDomain: "
-//			+ firstEntry.getDomainName()
-//			+ "\n\tExpiration: " + firstEntry.expirationDate);
-//		try {
-//		    //Class.forName("java.lang.Object");
-//		    Class.forName("android.util.Log");		    
-//		    System.out.println("Exists");
-//		} catch(Exception e) {
-//		    System.out.println("Doesn't exist"); 
-//		}
+				+ entry.getDomainName() + "\n\tExpiration: "
+				+ entry.getExpirationDate());
 	}
 
 }

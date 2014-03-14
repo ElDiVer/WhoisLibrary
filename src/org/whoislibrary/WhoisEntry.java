@@ -13,8 +13,8 @@ public class WhoisEntry {
 	
 	private final String domainName;
 	private Date expirationDate;
-	private boolean isRedirected;
-	private String redirectURL;	
+	private boolean isRedirected = false;
+	private String redirectURL = null;	
 
 	public WhoisEntry(String domainName) {
 		this.domainName = domainName;
