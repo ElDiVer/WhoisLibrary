@@ -8,14 +8,10 @@ import java.util.Locale;
 
 import org.whoislibrary.Whois;
 import org.whoislibrary.WhoisAbstract;
-import org.whoislibrary.log.WhoisLogger;
-import org.whoislibrary.log.WhoisLoggerFactory;
 
 
 public class WhoisCom extends WhoisAbstract implements Whois{
 
-	private static final WhoisLogger log = WhoisLoggerFactory.getLogger();
-	
 	public WhoisCom(){
 		super("whois.internic.net");
 		this.setPrefix("domain");

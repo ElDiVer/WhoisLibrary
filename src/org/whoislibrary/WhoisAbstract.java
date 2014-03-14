@@ -25,11 +25,12 @@ import org.whoislibrary.log.WhoisLoggerFactory;
  */
 public abstract class WhoisAbstract {
 	
-	//
-	private static final WhoisLogger log = WhoisLoggerFactory.getLogger();
 	private String queryPrefix;
 	private final String whoisURL;
+
+	protected static final WhoisLogger log = WhoisLoggerFactory.getLogger();
 	protected WhoisEntry whoisEntry = null;
+
 
 	public WhoisAbstract(String whoisURL){
 		this.whoisURL = whoisURL;

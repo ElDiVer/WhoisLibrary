@@ -8,13 +8,9 @@ import java.util.Locale;
 
 import org.whoislibrary.Whois;
 import org.whoislibrary.WhoisAbstract;
-import org.whoislibrary.log.WhoisLogger;
-import org.whoislibrary.log.WhoisLoggerFactory;
 
 
 public class WhoisOrg extends WhoisAbstract implements Whois {
-	
-	private static final WhoisLogger log = WhoisLoggerFactory.getLogger();
 
 	public WhoisOrg(){
 		super("whois.publicinterestregistry.net");
