@@ -38,7 +38,8 @@ public abstract class WhoisAbstract {
 	public String getWhoisURL() {		
 		return whoisURL;
 	}
-	/* This method is inherited by derived classes as a callback
+
+	/** This method is inherited by derived classes as a callback
 	   to parse the needed infos and fill the WhoisEntry object. */
 	protected abstract void parseLine(String line, int index);
 
@@ -66,15 +67,16 @@ public abstract class WhoisAbstract {
 	
 	/** Set a prefix in the query if needed. I.e. for .com
 	 * domain is safest to add domain prefix before the query. */
-	public void setPrefix(String queryPrefix){
+	protected void setPrefix(String queryPrefix){
 		this.queryPrefix = queryPrefix;
 	}
 	
 	/** Return the query Prefix if set.*/
-	public String getQueryPrefix(){
-		return this.getQueryPrefix();
+	public String getPrefix(){
+		return this.getPrefix();
 	}
-	
+
+	/** A new whoisEntry is created for every query. */
 	public WhoisEntry executeQuery(String query) {
 		log.debug(query);
 		try {

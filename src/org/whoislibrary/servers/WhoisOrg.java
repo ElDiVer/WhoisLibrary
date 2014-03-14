@@ -20,6 +20,7 @@ public class WhoisOrg extends WhoisAbstract implements Whois {
 		super("whois.publicinterestregistry.net");
 	}
 
+	@Override
 	protected void parseLine(String queryLine, int i) {
 		Date expDate = null;
 

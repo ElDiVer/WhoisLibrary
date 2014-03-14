@@ -20,7 +20,8 @@ public class WhoisCom extends WhoisAbstract implements Whois{
 		super("whois.internic.net");
 		this.setPrefix("domain");
 	}
-	
+
+	@Override
 	protected void parseLine(String queryLine, int i) {
 		Date expDate = null;
 	   	if(queryLine.startsWith("[")){
