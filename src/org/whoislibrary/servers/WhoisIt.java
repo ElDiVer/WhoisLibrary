@@ -6,10 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import org.whoislibrary.Whois;
 import org.whoislibrary.WhoisAbstract;
 
-public class WhoisIt extends WhoisAbstract implements Whois {
+
+public class WhoisIt extends WhoisAbstract {
 	
 	public WhoisIt(){
 		super("whois.nic.it");

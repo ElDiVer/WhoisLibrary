@@ -23,7 +23,7 @@ import org.whoislibrary.log.WhoisLoggerFactory;
  * @version 1.0
  *
  */
-public abstract class WhoisAbstract {
+public abstract class WhoisAbstract implements Whois {
 	
 	private String queryPrefix;
 	private final String whoisURL;
