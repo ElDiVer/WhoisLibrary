@@ -7,22 +7,20 @@ public class WhoisMain {
 	 */
 	public static void main(String[] args) { 
 		WhoisCommand query = new WhoisCommand("google.com");
-		WhoisEntry firstEntry = query.executeQuery();
-		printEntry(firstEntry);
+		WhoisEntry entry = query.executeQuery();
+		printEntry(entry);
 
 		query.setSearchQuery("dreamos.org");
-		firstEntry = query.executeQuery();
-		printEntry(firstEntry);
+		entry = query.executeQuery();
+		printEntry(entry);
 
 		query.setSearchQuery("osdev.it");
-		firstEntry = query.executeQuery();		
-		printEntry(firstEntry);
+		entry = query.executeQuery();		
+		printEntry(entry);
 	}
 
 	public static void printEntry(WhoisEntry entry) {
-		System.out.println("Reading WhoisEntry:\n\tDomain: "
-				+ entry.getDomainName() + "\n\tExpiration: "
-				+ entry.getExpirationDate());
+		System.out.println("Reading WhoisEntry:\n "+entry.toString());
 	}
 
 }
