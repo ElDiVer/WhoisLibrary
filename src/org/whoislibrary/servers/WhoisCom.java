@@ -6,11 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import org.whoislibrary.Whois;
 import org.whoislibrary.WhoisAbstract;
 
 
-public class WhoisCom extends WhoisAbstract implements Whois{
+public class WhoisCom extends WhoisAbstract {
 
 	public WhoisCom(){
 		super("whois.internic.net");
