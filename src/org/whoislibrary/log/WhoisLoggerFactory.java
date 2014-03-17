@@ -10,12 +10,13 @@ public class WhoisLoggerFactory {
 		return getLogger(WhoisLoggerFactory.class);
 	}
 
-	public static WhoisLogger getLogger(Object className){
+	public static WhoisLogger getLogger(Class className){
 		if (logger == null) {
 			try {		    
 			    Class.forName("android.util.Log");		    
 			    //System.out.println("Exists");
 			    logger = (WhoisLogger) Class.forName(ANDROID).newInstance();
+			    logger.setPackage(className.getPackage());
 			    //return null;			
 			} catch(Exception e) {
 			    System.out.println("Doesn't exist");

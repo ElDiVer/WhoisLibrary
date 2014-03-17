@@ -7,4 +7,6 @@ public interface WhoisLogger {
 	public int debug(String message);
 	public int error(String message);
 	
+	public void setPackage(Package class_package);
+	
 }
