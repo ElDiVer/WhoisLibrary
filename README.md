@@ -9,7 +9,7 @@ The requests that actually it can perform are only for the following domain type
 * .it
 
 This library is easy to use, and easy to extend, if you want to add a support for a new tld, you just have to extend the WhoisAbstract class, and override the following methods:
-* public WhoisEntry parseResponse(BufferedReader queryResult);
+* protected void parseLine(String line, int index);
 * public String getWhoisURL();
 
 And add an entry into the file whois.properties, in the following format:
@@ -29,6 +29,7 @@ The documentation is available here: http://inuyasha82.github.io/WhoisLibrary/do
 Copyright and Licence
 ---------------------
 Author Ivan Gualandri
+Contributor: Dario Casalinuovo
 
 The library is released under the therms of GNU/GPL v3 License.
 
