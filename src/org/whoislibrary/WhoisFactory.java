@@ -15,8 +15,10 @@ public class WhoisFactory {
 	
 	private static final WhoisLogger log = WhoisLoggerFactory.getLogger(WhoisFactory.class);
 	public static Whois getWhois(String fullclassname) {		
-		try {			
-			return (Whois)Class.forName(fullclassname).newInstance();
+		try {
+			if(fullclassname!=null){
+				return (Whois)Class.forName(fullclassname).newInstance();
+			}
 		} catch (InstantiationException e) {			
 			log.error(e.toString());
 		} catch (IllegalAccessException e) {
