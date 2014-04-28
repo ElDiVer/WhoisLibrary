@@ -38,8 +38,10 @@ public class WhoisMain {
 	}
 	
 	private static void usage(){
+		System.out.println(WhoisMain.class.getName() + " ver 0.1");
 		System.out.println("Usage: ");
 		System.out.println("\tjava -cp . " + WhoisMain.class.getName()+ " urlquery");
+		System.out.println("\tjava -cp . " + WhoisMain.class.getName() + " --help for this help");
 	}
 
 }
