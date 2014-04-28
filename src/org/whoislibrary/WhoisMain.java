@@ -6,12 +6,17 @@ public class WhoisMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println(args.length);
 		if(args.length>0){
-			System.out.println("Args: " + args[0]);
-			WhoisCommand query = new WhoisCommand(args[0]);
-			WhoisEntry entry = query.executeQuery();
-			printEntry(entry);
+			if(args[0].equals("--help")) {
+				usage();
+				System.exit(0);
+			} else {
+				System.out.println(args.length);
+				System.out.println("Args: " + args[0]);
+				WhoisCommand query = new WhoisCommand(args[0]);
+				WhoisEntry entry = query.executeQuery();
+				printEntry(entry);
+			}
 		}
 		WhoisCommand query = new WhoisCommand("google.com");
 		WhoisEntry entry = query.executeQuery();
@@ -30,6 +35,11 @@ public class WhoisMain {
 		if(entry!=null){
 			System.out.println("Reading WhoisEntry:\n "+entry.toString());
 		}
+	}
+	
+	private static void usage(){
+		System.out.println("Usage: ");
+		System.out.println("\tjava -cp . " + WhoisMain.class.getName()+ " urlquery");
 	}
 
 }
