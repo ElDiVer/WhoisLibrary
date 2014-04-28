@@ -49,6 +49,6 @@ Author Ivan Gualandri
 
 Contributor: Dario Casalinuovo
 
-The library is released under the therms of GNU/GPL v3 License.
+The library is released under the terms of GNU/GPL v3 License.
 
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=italialinux&url=https://github.com/inuyasha82/WhoisLibrary&title=WhoisLibrary&language=&tags=github&category=software)
