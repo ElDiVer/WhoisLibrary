@@ -6,8 +6,8 @@ public class WhoisMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		if(args.length>0){
-			if(args[0].equals("--help")) {
+		if (args.length>0){
+			if (args[0].equals("--help")) {
 				usage();
 				System.exit(0);
 			} else {
@@ -18,6 +18,7 @@ public class WhoisMain {
 				printEntry(entry);
 			}
 		}
+
 		WhoisCommand query = new WhoisCommand("google.com");
 		WhoisEntry entry = query.executeQuery();
 		printEntry(entry);
@@ -32,12 +33,14 @@ public class WhoisMain {
 	}
 
 	public static void printEntry(WhoisEntry entry) {
-		if(entry!=null){
-			System.out.println("Reading WhoisEntry:\n "+entry.toString());
+		if (entry != null) {
+			System.out.println("Query result: "+entry.toString());
+		} else {
+			System.out.println("The entry returned is null, please check log.");
 		}
 	}
-	
-	private static void usage(){
+
+	private static void usage() {
 		System.out.println(WhoisMain.class.getName() + " ver 0.1");
 		System.out.println("Usage: ");
 		System.out.println("\tjava -cp . " + WhoisMain.class.getName()+ " urlquery");
