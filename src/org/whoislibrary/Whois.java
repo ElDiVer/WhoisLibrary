@@ -1,12 +1,6 @@
 package org.whoislibrary;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
@@ -14,6 +8,7 @@ import java.net.Socket;
 import org.whoislibrary.log.WhoisLogger;
 import org.whoislibrary.log.WhoisLoggerFactory;
 import org.whoislibrary.parser.Template;
+import org.whoislibrary.parser.WhoisParserException;
 
 
 /**
@@ -41,7 +36,7 @@ public class Whois {
 	}
 
 	/** Return the whois port used */ 
-	public int getWhoisPort() {
+	private int getWhoisPort() {
 		return 43;
 	}
 
@@ -59,10 +54,10 @@ public class Whois {
 
 			InetAddress server = null;
 		    server = InetAddress.getByName(template.getWhoisServer());
-		    Socket theSocket = new Socket(server, getWhoisPort());
+		    Socket socket = new Socket(server, getWhoisPort());
 
 		    Writer out = new OutputStreamWriter(
-		    		theSocket.getOutputStream(), "8859_1");
+		    		socket.getOutputStream(), "8859_1");
 
 		    log.debug("write");
 		    out.write(prepareQuery(query));
@@ -70,34 +65,39 @@ public class Whois {
 		    out.flush();		    
 
 		    InputStream queryResult =
-		    		new BufferedInputStream(theSocket.getInputStream());
+		    		new BufferedInputStream(socket.getInputStream());
 
 		    BufferedReader queryData = new BufferedReader(
 		    		new InputStreamReader(queryResult));
 
-		    if (template.parseResponse(queryData, whoisEntry) != 1)
+		    int ret = template.parseResponse(queryData, whoisEntry);
+		    socket.close();
+
+		    if (ret == 0)
+		    	return whoisEntry;
+		    else
 		    	whoisEntry = null;
 
-		    theSocket.close();
-
-		    return whoisEntry;
+		    // TODO exceptions should maybe thrown at low level for more specific messages.
+		    throw new WhoisParserException("There was an error parsing data.");
 		} catch (MalformedURLException e) {
 			log.error(e.getStackTrace().toString());
 			e.printStackTrace();
+
+			throw new WhoisServerException("Error: malformed url.");
 		} catch (IOException e) {
 			log.error(e.getStackTrace().toString());
 			e.printStackTrace();
 		}
-		log.info("WhoisCom executeQuery");
+
 		return null;
 	}
-	
+
 	private String prepareQuery(String query) {
-		if (getQueryPrefix() != null) {
-			return String.format( getQueryPrefix() + " %s\r\n",query);
-		} else {
-			return String.format("%s\r\n",query);
-		}
+		if (getQueryPrefix() != null)
+			return String.format(getQueryPrefix() + " %s\r\n", query);
+		else
+			return String.format("%s\r\n", query);
 	}
 
 }

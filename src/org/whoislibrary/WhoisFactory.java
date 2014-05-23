@@ -17,9 +17,12 @@ public final class WhoisFactory {
 	private static final WhoisLogger log = WhoisLoggerFactory.getLogger(WhoisFactory.class);
 	private static ResourceBundle rb = ResourceBundle.getBundle("domain_map");
 
+	/*
+	 * Create a Whois object with the right template for the provided query.
+	 */
 	public static Whois getWhois(String query) {		
 		if (rb == null) {
-			log.error("WhoisFactory.Whois Error: No Loaded Parsers");
+			log.error("Error: No Loaded Parsers");
 			return null;
 		}
 
@@ -41,10 +44,10 @@ public final class WhoisFactory {
 	}
 
 	/** 
-	  * This method find the tld from a domain query, and return the classname 
-	  * needed for the whoisRequest.
+	  * This method find the Template from a domain map (the property file),
+	  * and return the classname needed for the WhoisRequest.
 	  * @param query The domain query 
-	  * @return the classname needed for that TLD.
+	  * @return the classname needed for that Template.
 	  */
 	private static String getParserClass(String query) {
 		String domain = query.substring(query.lastIndexOf(".")+1);

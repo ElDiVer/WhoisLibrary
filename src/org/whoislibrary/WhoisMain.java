@@ -6,7 +6,7 @@ public class WhoisMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		if (args.length>0){
+		if (args.length > 0) {
 			if (args[0].equals("--help")) {
 				usage();
 				System.exit(0);
@@ -23,21 +23,24 @@ public class WhoisMain {
 		WhoisEntry entry = query.executeQuery();
 		printEntry(entry);
 
-		query.setSearchQuery("dreamos.org");
-		entry = query.executeQuery();
+		entry = query.executeQuery("dreamos.org");
 		printEntry(entry);
 
-		query.setSearchQuery("osdev.it");
-		entry = query.executeQuery();		
+		entry = query.executeQuery("osdev.it");		
+		printEntry(entry);
+
+		entry = query.executeQuery("surelythisdomainwillnotexist.com");		
 		printEntry(entry);
 	}
 
 	public static void printEntry(WhoisEntry entry) {
 		if (entry != null) {
-			System.out.println("Query result: "+entry.toString());
-		} else {
+			if (entry.isAvailable())
+				System.out.println("Domain "+entry.getDomainName()+" is available.");
+			else
+				System.out.println("Query result: "+entry.toString());
+		} else
 			System.out.println("The entry returned is null, please check log.");
-		}
 	}
 
 	private static void usage() {

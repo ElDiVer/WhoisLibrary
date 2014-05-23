@@ -2,11 +2,15 @@ package org.whoislibrary.log;
 
 public class WhoisLoggerFactory {
 	
-	private static final String ANDROID = "org.whoislibrary.log.android.WhoisAndroidLog";
-	private static final String APACHE = "org.whoislibrary.log.WhoisLog";
+	private static final String ANDROID
+		= "org.whoislibrary.log.android.WhoisAndroidLog";
+
+	private static final String APACHE
+		= "org.whoislibrary.log.WhoisLog";
+
 	private static WhoisLogger logger = null;
 
-	public static WhoisLogger getLogger(){
+	public static WhoisLogger getLogger() {
 		return getLogger(WhoisLoggerFactory.class);
 	}
 

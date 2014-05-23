@@ -25,8 +25,14 @@ public class StringOperation extends ParseOperation {
 	/** 
 	 * In this case we assume that the end is only \n
 	 */
+
 	public StringOperation(String begin, int infoCode) {
 		super(OperationType.STRING, infoCode);
+		this.begin = begin;
+	}
+
+	public StringOperation(String begin, int infoCode, boolean multiline) {
+		super(OperationType.STRING, infoCode, multiline);
 		this.begin = begin;
 	}
 
@@ -36,6 +42,10 @@ public class StringOperation extends ParseOperation {
 			return 1;
 
 		switch (this.infoCode) {
+
+			case Template.AVAILABLE:
+				dest.setAvailable(true);
+				break;
 
 			case Template.REGISTRAR:
 				dest.setRegistrar(var);
@@ -47,13 +57,14 @@ public class StringOperation extends ParseOperation {
 
 			case Template.SERVER:
 				dest.setReferredServer(var);
+				break;
 
 			case Template.NAMESERVER:
 				dest.addNameServer(var);
 				break;
 
 			case Template.STATUS:
-				//dest.setStatus(var);
+				//dest.addStatus(var);
 				break;
 		}
 

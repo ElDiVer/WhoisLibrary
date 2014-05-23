@@ -21,12 +21,25 @@ public class DateOperation extends ParseOperation {
 
 	public DateOperation(String begin, int infoCode, DateFormat dateFormat) {
 		super(OperationType.DATE, infoCode);
-		this.begin = begin;
-		this.dateFormat = dateFormat;
+		_Init(begin, null, dateFormat);
 	}
 
 	public DateOperation(String begin, int infoCode, String end, DateFormat dateFormat) {
 		super(OperationType.DATE, infoCode);
+		_Init(begin, end, dateFormat);
+	}
+
+	public DateOperation(String begin, int infoCode, DateFormat dateFormat, boolean multiline) {
+		super(OperationType.DATE, infoCode, multiline);
+		_Init(begin, null, dateFormat);
+	}
+
+	public DateOperation(String begin, int infoCode, String end, DateFormat dateFormat, boolean multiline) {
+		super(OperationType.DATE, infoCode, multiline);
+		_Init(begin, end, dateFormat);
+	}
+
+	private final void _Init(String begin, String end, DateFormat dateFormat) {
 		this.begin = begin;
 		this.end = end;
 		this.dateFormat = dateFormat;
@@ -50,13 +63,13 @@ public class DateOperation extends ParseOperation {
 		switch (this.infoCode) {
 			case Template.EXPIRE:
 			{
-			    dest.setExpirationDate(date);
+			    dest.setExpiration(date);
 				break;
 			}
 
 			case Template.CREATION:
 			{
-				dest.setCreationDate(date);
+				dest.setCreation(date);
 				break;
 			}
 

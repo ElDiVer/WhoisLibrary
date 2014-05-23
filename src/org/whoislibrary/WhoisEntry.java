@@ -14,6 +14,8 @@ import java.util.List;
 public final class WhoisEntry {
 	private final String domainName;
 
+	boolean available = false;
+
 	private String rawData = null;
 
 	private Date expiration = null;
@@ -28,8 +30,17 @@ public final class WhoisEntry {
 	private String redirectURL = null;	
 	private ArrayList<String> nameServerList = new ArrayList<String>();
 
+
 	public WhoisEntry(String domainName) {
 		this.domainName = domainName;
+	}
+
+	public boolean isAvailable() {
+		return this.available;
+	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
 	}
 
 	public String getRawData() {
@@ -96,7 +107,7 @@ public final class WhoisEntry {
 		return expiration;
 	}
 
-	public void setExpirationDate(Date date) {
+	public void setExpiration(Date date) {
 		expiration = date;
 	}
 
@@ -104,7 +115,7 @@ public final class WhoisEntry {
 		return creation;
 	}
 
-	public void setCreationDate(Date date) {
+	public void setCreation(Date date) {
 		creation = date;
 	}
 

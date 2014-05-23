@@ -20,11 +20,11 @@ public class SkipOperation extends ParseOperation {
 		this.skip = skip;
 	}
 
-	public int getLinesToSkip() {
+	public final int getLinesToSkip() {
 		return skip;
 	}
 
-	public int examine(String line, WhoisEntry dest, int index) {
+	public final int examine(String line, WhoisEntry dest, int index) {
 		return 1;
 	}
 }

@@ -13,6 +13,7 @@ import org.whoislibrary.WhoisEntry;
 
 public abstract class ParseOperation {
 	private OperationType type = OperationType.UNKNOWN;
+	private boolean multiline = false;
 	protected int infoCode = Template.NOCODE;
 
 	public enum OperationType {
@@ -27,15 +28,31 @@ public abstract class ParseOperation {
 		this.type = type;
 	}
 
+	/**
+	 * sWhen an operation is multiline, it will be iterated until it found a matching string,
+	 * then continue until it found a non matching string. Once the non matching is found,
+	 * the parser continue to the next operation.
+	 * NOTE: not all variables are multiline see ParseOperation inherited classes.
+	 **/
+	public ParseOperation(OperationType type, int infoCode, boolean multiline) {
+		this.infoCode = infoCode;
+		this.type = type;
+		this.multiline = multiline;
+	}
+
 	public OperationType getType() {
 		return type;
 	}
 
-	public int getInfoCode() {
+	public final boolean isMultiLine() {
+		return multiline;
+	}
+
+	public final int getInfoCode() {
 		return infoCode;
 	}
 
-	protected String findVar(String line, String begin, String end) {
+	protected final String findVar(String line, String begin, String end) {
 		// TODO this should be improved.
 		int first = line.indexOf(begin);
 		if (first == -1)
