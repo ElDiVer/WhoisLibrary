@@ -5,20 +5,20 @@ This is a draft of a java library that provides a basic and simple api to perfor
 
 The requests that actually it can perform are only for the following domain types: 
 * .com
+* .net
+* .edu
 * .org 
 * .it
 
-This library is easy to use, and easy to extend, if you want to add a support for a new tld, you just have to extend the WhoisAbstract class, and override the following methods:
-* protected void parseLine(String line, int index);
-* public String getWhoisURL();
+This library is easy to use, and easy to extend, if you want to add a support for a new tld, you just have to extend the Template class. The whois URL is passed to the constructor as argument, you have to load operations using the loadOperations method.
 
-And add an entry into the file whois.properties, in the following format:
+Then, you have to add an entry into the file whois.properties, in the following format:
 
 tld=fullclassName
 
 For example:
 ```Java
-org=org.whoislibrary.servers.WhoisOrg
+org=org.whoislibrary.templates.TemplateOrg
 ```
 
 Usage
