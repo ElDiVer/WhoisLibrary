@@ -37,6 +37,26 @@ For example:
 org=org.whoislibrary.templates.TemplateOrg
 ```
 
+Compile
+-------------
+You can create an executable jar using ant build system. If you haven't installed ant yet you can download it from here: 
+
+http://ant.apache.org/bindownload.cgi
+
+Once you have installed it you can compile the program using (remember that if you haven't added the ant bin folder into yuour PATH you must use the full path: /yourpathtoant/bin/ant): 
+
+```Bash
+ant jar
+```
+To build an executable jar.
+Or you can just compile classes using: 
+
+```Bash
+ant compile
+```
+
+The binaries are stored into the bin folder of the project.
+
 Usage
 -----
 
@@ -52,6 +72,11 @@ If you specify a domain name, if the tld is implemented it gives you the result 
 
 ```Bash
 java WhoisMain yourdomain.com
+```
+
+If you are using the jar file: 
+```Bash
+java -jar whois.jar yourdomain.com
 ```
 
 Documentation
