@@ -1,7 +1,7 @@
 WhoisLibrary
 ==================
 
-This is a java library that provides a basic and simple api to perform whois requests. It's currently in alpha status.
+This is a java library that provides a simple yet powerful api to perform whois requests. It's currently in alpha status.
 
 The requests it can perform actually are only for the following domains: 
 * .com
@@ -10,7 +10,12 @@ The requests it can perform actually are only for the following domains:
 * .org 
 * .it
 
-This library is easy to use, and easy to extend, if you want to add a support for a new TLD, you have to just extend the Template class. Parse operations are filled into an array of objects derived from ParseOperation. There are actually three derived classes :
+Add support for a new TLD
+-----------------------
+
+The library template system is easy to use, and easy to extend, if you want to add a support for a new TLD, you have to just extend the Template class. Parse operations are filled into an array of objects derived from ParseOperation. If you add an unsupported domain or make some bugfix, please send us a patch.
+
+There are actually three derived classes :
 
 * StringOperation
 
@@ -24,9 +29,7 @@ It's used to get, parse and convert dates from String to Date.
 
 This is optional, and should be use to instruct the parser to ignore a given number of lines.
 
-The whois server URL is passed to the constructor as argument, you have to load operations using the loadOperations method.
-
-Please see the templates directory for examples.
+The whois server URL is passed to the constructor as argument, you have to load operations using the loadOperations method, see the templates directory for more informations.
 
 Once you created your Template, you have to add an entry into the file domain_map.properties, in the following format:
 
