@@ -10,6 +10,8 @@ The requests it can perform actually are only for the following domains:
 * .org 
 * .it
 
+WhoisLibrary doesn't only let you to get the raw result of a whois request. It's based on a templating system allowing to parse the raw data, the parser provide to you the results in a well-structured form by filling the WhoisEntry object. Since formats and responses may vary greatly, it's not possible to parse all data from all TLDs. WhoisLibrary has been designed as a trade-off between data relevance, uniformity and completeness, but without any bottleneck preventing you to create a custom version of the library that feets the specifical needs you have. Nonetheless WhoisEntry carry also with it the raw version of the data, that you can get using the method WhoisEntry::getRawData(). This may allow to you to retrieve additional data without the need to modify the library at all.
+
 Add support for a new TLD
 -----------------------
 
@@ -92,6 +94,6 @@ Copyright and Licence
 Authors:  Ivan Gualandri
           Dario Casalinuovo
 
-The library is released under the terms of GNU/GPL v3 License.
+The library is released under the terms of GNU/GPL v3 License. If you like it please donate a coffee!
 
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=italialinux&url=https://github.com/inuyasha82/WhoisLibrary&title=WhoisLibrary&language=&tags=github&category=software)
