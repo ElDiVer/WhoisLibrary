@@ -86,9 +86,8 @@ The documentation is available here: http://inuyasha82.github.io/WhoisLibrary/do
 
 Copyright and Licence
 ---------------------
-Author Ivan Gualandri
-
-Contributor: Dario Casalinuovo
+Authors:  Ivan Gualandri
+          Dario Casalinuovo
 
 The library is released under the terms of GNU/GPL v3 License.
 
