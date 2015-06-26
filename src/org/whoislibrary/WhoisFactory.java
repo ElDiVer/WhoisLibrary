@@ -1,6 +1,8 @@
 package org.whoislibrary;
 
 import java.util.ResourceBundle;
+import org.whoislibrary.log.WhoisLogger;
+import org.whoislibrary.log.WhoisLoggerFactory;
 import org.whoislibrary.parser.Template;
 
 /**
@@ -12,6 +14,7 @@ import org.whoislibrary.parser.Template;
  */
 
 public final class WhoisFactory {
+	private static final WhoisLogger log = WhoisLoggerFactory.getLogger(WhoisFactory.class);
 	private static ResourceBundle rb = ResourceBundle.getBundle("domain_map");
 
 	/*

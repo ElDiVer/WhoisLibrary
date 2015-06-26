@@ -5,6 +5,8 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
 
+import org.whoislibrary.log.WhoisLogger;
+import org.whoislibrary.log.WhoisLoggerFactory;
 import org.whoislibrary.parser.Template;
 import org.whoislibrary.parser.WhoisParserException;
 
@@ -20,6 +22,7 @@ import org.whoislibrary.parser.WhoisParserException;
 
 public class Whois {
 	private final Template template;
+	protected static final WhoisLogger log = WhoisLoggerFactory.getLogger();
 	protected WhoisEntry whoisEntry = null;
 
 	public Whois(Template template) {
