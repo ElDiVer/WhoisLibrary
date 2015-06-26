@@ -40,14 +40,13 @@ public final class TemplateOrg extends Template {
 		new StringOperation("NOT FOUND", AVAILABLE)
 	};
 
-	// TODO implement this
 	protected static final ParseOperation errorCheck[] = {
-		new StringOperation("No match for domain ", ERROR)
+		new StringOperation("No match for domain ", ERROR),
+		new StringOperation("Not a valid domain search pattern", ERROR)
 	};
-
 
 	public TemplateOrg() {
 		super("whois.publicinterestregistry.net");
-		loadOperations(parse, availabilityCheck);
+		loadOperations(parse, availabilityCheck, errorCheck);
 	}
 }

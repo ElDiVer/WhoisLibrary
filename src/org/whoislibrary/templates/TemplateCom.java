@@ -41,10 +41,13 @@ public final class TemplateCom extends Template {
 		new StringOperation("No match for domain ", AVAILABLE)
 	};
 
+	protected static final ParseOperation errorCheck[] = {
+		//new StringOperation("", ERROR)
+	};
+
 	public TemplateCom() {
 		super("whois.internic.net");
-
 		setQueryPrefix("domain");
-		loadOperations(parse, availabilityCheck);
+		loadOperations(parse, availabilityCheck, errorCheck);
 	}
 }

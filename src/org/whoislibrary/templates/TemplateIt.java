@@ -36,8 +36,12 @@ public final class TemplateIt extends Template {
 		new StringOperation("Status:             AVAILABLE", AVAILABLE)
 	};
 
+	protected static final ParseOperation errorCheck[] = {
+		//new StringOperation("", ERROR)
+	};
+
 	public TemplateIt() {
 		super("whois.nic.it");
-		loadOperations(parse, availabilityCheck);
+		loadOperations(parse, availabilityCheck, errorCheck);
 	}
 }
