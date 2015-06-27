@@ -153,6 +153,7 @@ public abstract class Template {
     	// we should return an error since something probably gone bad.
 	    if (errorMode == true && operationCount != 0)
 			return 0;
+	    // NOTe: It appears to be unreachable code!
 	    if (errorMode = false && operationCount != operations.length)
 	    	return 1;
 
