@@ -34,6 +34,10 @@ public class WhoisMain {
 
 		entry = query.executeQuery("tryingsòmèthinginvalid.!^.org");
 		printEntry(entry);
+		
+		entry = query.executeQuery("repubblica.info");		
+		printEntry(entry);
+		
 	}
 
 	public static void printEntry(WhoisEntry entry) {
