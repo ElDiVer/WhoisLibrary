@@ -7,6 +7,7 @@ import java.util.Locale;
 import org.whoislibrary.parser.DateOperation;
 import org.whoislibrary.parser.ParseOperation;
 import org.whoislibrary.parser.SkipOperation;
+import org.whoislibrary.parser.StringOperation;
 import org.whoislibrary.parser.Template;
 
 /**
@@ -27,10 +28,14 @@ public class TemplateInfo extends Template {
 		new DateOperation("Updated Date: ", LASTUPDATED, dateFormat),
 		new DateOperation("Registry Expiry Date: ", EXPIRE, dateFormat)
 	};
+	
+	private static final ParseOperation availabilityCheck[] = {
+		new StringOperation("NOT FOUND", AVAILABLE)
+	};
 
 	public TemplateInfo() {
 		super("whois.afilias.net");
-		// TODO Auto-generated constructor stub
+		loadOperations(parse, availabilityCheck);
 	}
 
 }

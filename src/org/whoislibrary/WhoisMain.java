@@ -31,6 +31,10 @@ public class WhoisMain {
 
 		entry = query.executeQuery("surelythisdomainwillnotexist.com");		
 		printEntry(entry);
+		
+		entry = query.executeQuery("repubblica.info");		
+		printEntry(entry);
+		
 	}
 
 	public static void printEntry(WhoisEntry entry) {
