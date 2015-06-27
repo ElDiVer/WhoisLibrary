@@ -13,8 +13,10 @@
   	<target name="mkdir">
   	    <mkdir dir="${obj-dir}"/>
   	</target>
+	<target name="create_run_jar">
+		<echo>Empty Task</echo>
+	</target>
     <target name="jar" depends="mkdir,clean">
-        
         <jar destfile="${obj-dir}/whois.jar">
             <manifest>
                 <attribute name="Rsrc-Main-Class" value="org.whoislibrary.WhoisMain"/>
