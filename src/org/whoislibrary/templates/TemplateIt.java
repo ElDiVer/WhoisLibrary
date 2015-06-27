@@ -4,11 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import org.whoislibrary.parser.ParseOperation;
-import org.whoislibrary.parser.DateOperation;
-import org.whoislibrary.parser.SkipOperation;
-import org.whoislibrary.parser.StringOperation;
-import org.whoislibrary.parser.Template;
+import org.whoislibrary.parser.*;
 
 /**
  * 
