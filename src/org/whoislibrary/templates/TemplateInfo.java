@@ -32,10 +32,14 @@ public class TemplateInfo extends Template {
 	private static final ParseOperation availabilityCheck[] = {
 		new StringOperation("NOT FOUND", AVAILABLE)
 	};
+	
+	protected static final ParseOperation errorCheck[] = {
+		//new StringOperation("", ERROR)
+	};
 
 	public TemplateInfo() {
 		super("whois.afilias.net");
-		loadOperations(parse, availabilityCheck);
+		loadOperations(parse, availabilityCheck, errorCheck);
 	}
 
 }
