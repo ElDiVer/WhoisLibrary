@@ -4,11 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import org.whoislibrary.parser.DateOperation;
-import org.whoislibrary.parser.ParseOperation;
-import org.whoislibrary.parser.SkipOperation;
-import org.whoislibrary.parser.StringOperation;
-import org.whoislibrary.parser.Template;
+import org.whoislibrary.parser.*;
 
 /**
  * 
@@ -40,14 +36,13 @@ public final class TemplateOrg extends Template {
 		new StringOperation("NOT FOUND", AVAILABLE)
 	};
 
-	// TODO implement this
 	protected static final ParseOperation errorCheck[] = {
-		new StringOperation("No match for domain ", ERROR)
+		new StringOperation("No match for domain ", ERROR),
+		new StringOperation("Not a valid domain search pattern", ERROR)
 	};
-
 
 	public TemplateOrg() {
 		super("whois.publicinterestregistry.net");
-		loadOperations(parse, availabilityCheck);
+		loadOperations(parse, availabilityCheck, errorCheck);
 	}
 }

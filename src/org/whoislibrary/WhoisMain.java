@@ -31,6 +31,9 @@ public class WhoisMain {
 
 		entry = query.executeQuery("surelythisdomainwillnotexist.com");		
 		printEntry(entry);
+
+		entry = query.executeQuery("tryingsòmèthinginvalid.!^.org");
+		printEntry(entry);
 		
 		entry = query.executeQuery("repubblica.info");		
 		printEntry(entry);
@@ -40,7 +43,11 @@ public class WhoisMain {
 	public static void printEntry(WhoisEntry entry) {
 		if (entry != null) {
 			if (entry.isAvailable())
-				System.out.println("Domain "+entry.getDomainName()+" is available.");
+				System.out.println("Domain "+entry.getDomainName()
+					+" is available.");
+			else if (entry.isQueryInvalid())
+				System.out.println("Domain "+entry.getDomainName()
+					+" is an invalid query.");
 			else
 				System.out.println("Query result: "+entry.toString());
 		} else

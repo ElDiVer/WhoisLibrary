@@ -14,6 +14,7 @@ import java.util.List;
 public final class WhoisEntry {
 	private final String domainName;
 
+	boolean invalidQuery = false;
 	boolean available = false;
 
 	private String rawData = null;
@@ -33,6 +34,14 @@ public final class WhoisEntry {
 
 	public WhoisEntry(String domainName) {
 		this.domainName = domainName;
+	}
+
+	public boolean isQueryInvalid() {
+		return invalidQuery;
+	}
+
+	public void setInvalidQuery(boolean invalid) {
+		invalidQuery = invalid;
 	}
 
 	public boolean isAvailable() {

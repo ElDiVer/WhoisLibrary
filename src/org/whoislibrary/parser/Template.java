@@ -18,23 +18,25 @@ import org.whoislibrary.WhoisEntry;
 public abstract class Template {
 	private String queryPrefix;
 	private String server = null;
+
 	protected ParseOperation parseOperations[] = null;
 	protected ParseOperation availabilityOperations[] = null;
+	protected ParseOperation errorOperations[] = null;
 
 	// String
-	public static final int	ERROR = -2;
-	public static final int	AVAILABLE = -1;
-	public static final int	NOCODE = 0;
-	public static final int REGISTRAR = 1;
-	public static final int SERVER = 2;
-	public static final int REFERRAL = 3;
-	public static final int NAMESERVER = 4;
-	public static final int STATUS = 5;
+	public static final int	ERROR = -1;
+	public static final int	AVAILABLE = 0;
+	public static final int	NOCODE = 1;
+	public static final int REGISTRAR = 2;
+	public static final int SERVER = 3;
+	public static final int REFERRAL = 4;
+	public static final int NAMESERVER = 5;
+	public static final int STATUS = 6;
 
 	// Date
-	public static final int LASTUPDATED = 6;
-	public static final int CREATION = 7;
-	public static final int EXPIRE = 8;
+	public static final int LASTUPDATED = 20;
+	public static final int CREATION = 21;
+	public static final int EXPIRE = 22;
 
 	public Template(String server) {
 		this.server = server;
@@ -72,22 +74,31 @@ public abstract class Template {
 			return 1;
 		}
 
-		int ret = executeOperations(list, availabilityOperations, entry);
+		// We set it here so that the client can always read the
+		// unparsed response.
+		entry.setRawData(list.toString());
 
+		int ret = executeOperations(list, availabilityOperations, entry, false);
 		if (ret == 0 && entry.isAvailable())
 			return ret;
 
-		return executeOperations(list, parseOperations, entry);
+		ret = executeOperations(list, errorOperations, entry, true);
+		if (ret == 0 && entry.isQueryInvalid())
+			return ret;
+
+		return executeOperations(list, parseOperations, entry, false);
 	}
 
-	protected void loadOperations(ParseOperation parse[], ParseOperation availability[]) {
+	protected void loadOperations(ParseOperation parse[],
+		ParseOperation availability[], ParseOperation error[]) {
 		this.parseOperations = parse;
 		this.availabilityOperations = availability;
+		this.errorOperations = error;
 	}
 
 	/** Parse the input data using the operations defined by the Template.*/
 	public int executeOperations(ArrayList<String> queryResult,
-			ParseOperation operations[], WhoisEntry entry) {
+			ParseOperation operations[], WhoisEntry entry, boolean errorMode) {
 
 		String queryLine;
 		int operationCount = 0;
@@ -99,7 +110,6 @@ public abstract class Template {
 
 	    	queryLine = queryResult.get(i);
 
-	    	//System.out.println(queryLine);
 	    	ParseOperation operation = operations[operationCount];
  
 	    	switch (operation.getType()) {
@@ -131,15 +141,21 @@ public abstract class Template {
 	    		continue;
 	    	} else if (status == 0 && operation.isMultiLine() == true) {
 	    		multilineCatch = true;
+			} else if (status == 1 && errorMode == true) {
+				// This is done because there may be different erros
+				// and one matching string is enough to report an invalid query.
+				operationCount++;
+				i--;
 	    	}
 	    }
 
     	// NOTE: If we have already unused operations in the queue
     	// we should return an error since something probably gone bad.
-	   if (operationCount != operations.length)
+	    if (errorMode == true && operationCount != 0)
+			return 0;
+	    if (errorMode = false && operationCount != operations.length)
 	    	return 1;
 
-    	entry.setRawData(queryResult.toString());
     	return 0;
 	}
 }

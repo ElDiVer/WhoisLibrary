@@ -43,6 +43,10 @@ public class StringOperation extends ParseOperation {
 
 		switch (this.infoCode) {
 
+			case Template.ERROR:
+				dest.setInvalidQuery(true);
+				break;
+
 			case Template.AVAILABLE:
 				dest.setAvailable(true);
 				break;

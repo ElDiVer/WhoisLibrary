@@ -4,11 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import org.whoislibrary.parser.ParseOperation;
-import org.whoislibrary.parser.DateOperation;
-import org.whoislibrary.parser.SkipOperation;
-import org.whoislibrary.parser.StringOperation;
-import org.whoislibrary.parser.Template;
+import org.whoislibrary.parser.*;
 
 /**
  * 
@@ -36,8 +32,12 @@ public final class TemplateIt extends Template {
 		new StringOperation("Status:             AVAILABLE", AVAILABLE)
 	};
 
+	protected static final ParseOperation errorCheck[] = {
+		//new StringOperation("", ERROR)
+	};
+
 	public TemplateIt() {
 		super("whois.nic.it");
-		loadOperations(parse, availabilityCheck);
+		loadOperations(parse, availabilityCheck, errorCheck);
 	}
 }
