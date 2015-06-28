@@ -154,7 +154,7 @@ public abstract class Template {
 	    if (errorMode == true && operationCount != 0)
 			return 0;
 	    // NOTe: It appears to be unreachable code!
-	    if (errorMode = false && operationCount != operations.length)
+	    if (errorMode == false && operationCount != operations.length)
 	    	return 1;
 
     	return 0;
