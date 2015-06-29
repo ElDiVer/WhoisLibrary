@@ -26,18 +26,17 @@ public class WhoisMain {
 		entry = query.executeQuery("dreamos.org");
 		printEntry(entry);
 
-		entry = query.executeQuery("osdev.it");		
+		entry = query.executeQuery("osdev.it");
 		printEntry(entry);
 
-		entry = query.executeQuery("surelythisdomainwillnotexist.com");		
+		entry = query.executeQuery("repubblica.info");
+		printEntry(entry);
+
+		entry = query.executeQuery("surelythisdomainwillnotexist.com");	
 		printEntry(entry);
 
 		entry = query.executeQuery("tryingsòmèthinginvalid.!^.org");
 		printEntry(entry);
-		
-		entry = query.executeQuery("repubblica.info");		
-		printEntry(entry);
-		
 	}
 
 	public static void printEntry(WhoisEntry entry) {
@@ -51,14 +50,19 @@ public class WhoisMain {
 			else
 				System.out.println("Query result: "+entry.toString());
 		} else
-			System.out.println("The entry returned is null, please check log.");
+			System.out.println("The entry returned is null,"
+					+ "please check log.");
 	}
 
 	private static void usage() {
 		System.out.println(WhoisMain.class.getName() + " ver 0.1");
 		System.out.println("Usage: ");
-		System.out.println("\tjava -cp . " + WhoisMain.class.getName()+ " urlquery");
-		System.out.println("\tjava -cp . " + WhoisMain.class.getName() + " --help for this help");
+
+		System.out.println("\tjava -cp . " + WhoisMain.class.getName()
+				+ " urlquery");
+
+		System.out.println("\tjava -cp . " + WhoisMain.class.getName()
+				+ " --help for this help");
 	}
 
 }
