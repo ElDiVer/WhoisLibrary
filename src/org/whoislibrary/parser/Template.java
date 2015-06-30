@@ -131,16 +131,16 @@ public abstract class Template {
 
 	    	int status = operation.examine(queryLine, entry, i);
 
-	    	if (status == 0 && operation.isMultiLine() == false) {
+	    	if (status == 0 && operation.isMultiLine() == false)
 	    		operationCount++;
-	    	} else if (status != 0 && operation.isMultiLine() == true
+	    	else if (status == 0 && operation.isMultiLine() == true)
+	    		multilineCatch = true;
+	    	else if (status != 0 && operation.isMultiLine() == true
 	    			&& multilineCatch == true) {
 	    		operationCount++;
 	    		multilineCatch = false;
 	    		i--;
 	    		continue;
-	    	} else if (status == 0 && operation.isMultiLine() == true) {
-	    		multilineCatch = true;
 			} else if (status == 1 && errorMode == true) {
 				// This is done because there may be different erros
 				// and one matching string is enough to report an invalid query.
@@ -149,12 +149,10 @@ public abstract class Template {
 	    	}
 	    }
 
-    	// NOTE: If we have already unused operations in the queue
-    	// we should return an error since something probably gone bad.
 	    if (errorMode == true && operationCount != 0)
 			return 0;
-	    // NOTe: It appears to be unreachable code!
-	    if (errorMode = false && operationCount != operations.length)
+
+	    if (errorMode == false && operationCount != operations.length)
 	    	return 1;
 
     	return 0;
