@@ -5,12 +5,13 @@ This is a java library that provides a simple yet powerful api to perform whois 
 
 The requests it can perform actually are only for the following domains: 
 * .com
-* .net
 * .edu
-* .org 
 * .it
+* .info
+* .net
+* .org 
 
-WhoisLibrary doesn't only let you to get the raw result of a whois request. It's based on a templating system allowing to parse the raw data, the parser provide to you the results in a well-structured form by filling the WhoisEntry object. Since formats and responses may vary greatly, it's not possible to parse all data from all TLDs. WhoisLibrary has been designed as a trade-off between data relevance, uniformity and completeness, but without any bottleneck preventing you to create a custom version of the library that feets the specifical needs you have. Nonetheless WhoisEntry carry also with it the raw version of the data, that you can get using the method WhoisEntry::getRawData(). This may allow to you to retrieve additional data without the need to modify the library at all.
+WhoisLibrary doesn't only let you to get the raw result of a whois request. It's based on a templating system allowing to parse the raw data, the parser provide the results in a well-structured form by filling the WhoisEntry object. Since formats and responses may vary greatly, it's not possible to parse and organize all data from all TLDs. WhoisLibrary has been designed as a trade-off between data relevance, uniformity and completeness, but without bottlenecks preventing to create a custom version of the library that feets the specifical needs you have. Nonetheless WhoisEntry carry also with it the raw version of the data, that can get using the method WhoisEntry::getRawData(). This will allow to retrieve additional data without the need to modify the library at all.
 
 Add support for a new TLD
 -----------------------
@@ -41,6 +42,8 @@ For example:
 ```Java
 org=org.whoislibrary.templates.TemplateOrg
 ```
+
+TemplateGeneric is a start skeleton to develop a new template.
 
 Compile
 -------------
