@@ -25,4 +25,5 @@
       </plugin>
     </plugins>
   </build>
+  <description>A library to get basic Information about domains (i.e. expiration date, registration date, etc.)</description>
 </project>
