@@ -47,6 +47,8 @@ TemplateGeneric is a start skeleton to develop a new template.
 
 Compile
 -------------
+
+#### Using ant
 You can create an executable jar using ant build system. If you haven't installed ant yet you can download it from here: 
 
 http://ant.apache.org/bindownload.cgi
@@ -64,6 +66,20 @@ ant compile
 ```
 
 The binaries are stored into the bin folder of the project.
+
+#### Using Maven
+(DRAFT)
+If you haven't installed maven yet, you can download it here:
+
+https://maven.apache.org/
+
+Once you have installed it you can compile the program using (remember that if you haven't added the ant bin folder into yuour PATH you must use the full path: /yourpathtomaven/bin/mvn):
+
+```Bash
+mvn clean package
+```
+
+The binaries are stored into the target folder.
 
 Usage
 -----
